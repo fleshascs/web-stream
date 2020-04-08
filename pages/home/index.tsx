@@ -19,12 +19,17 @@ import {
 } from "@Styled/Home";
 import { IStore } from "@Redux/IStore";
 import { HomeActions } from "@Actions";
-import { Heading, LocaleButton } from "@Components";
-// #endregion Local Imports
-
-// #region Interface Imports
+import {
+    Heading,
+    LocaleButton,
+    Video,
+    Card,
+    VideoCard,
+    Right,
+    ViewersList,
+} from "@Components";
 import { IHomePage, ReduxNextPageContext } from "@Interfaces";
-// #endregion Interface Imports
+import { shareScreen, shareWebCam } from "@Services/video";
 
 const Home: NextPage<IHomePage.IProps, IHomePage.InitialProps> = ({
     t,
@@ -43,9 +48,30 @@ const Home: NextPage<IHomePage.IProps, IHomePage.InitialProps> = ({
             />
         ));
 
+    const screen = React.useRef<HTMLVideoElement>(null);
+    const webCam = React.useRef<HTMLVideoElement>(null);
+    const toggleShareScreen = () => {
+        console.log("screen share", screen.current);
+        shareScreen(screen.current);
+    };
+
+    const toggleShareWebCam = () => {
+        console.log("web cam", webCam.current);
+        shareWebCam(webCam.current);
+    };
+
     return (
         <Container>
-            <Top>
+            <Middle>Front page</Middle>
+
+            {/* <VideoCard>
+                <div>
+                    <Video ref={webCam} />
+                </div>
+                <div>test</div>
+            </VideoCard> */}
+
+            {/* <Top>
                 <img src="/static/images/pankod-logo.png" alt="Pankod Logo" />
             </Top>
             <Middle>
@@ -77,7 +103,7 @@ const Home: NextPage<IHomePage.IProps, IHomePage.InitialProps> = ({
                         />
                     </Apod>
                 </MiddleRight>
-            </Middle>
+            </Middle> */}
         </Container>
     );
 };

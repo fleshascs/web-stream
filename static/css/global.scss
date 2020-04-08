@@ -1,0 +1,26 @@
+@font-face {
+    font-family: bauerg;
+    src: url("/static/fonts/Bauer.woff") format("truetype");
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica,
+        Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol";
+}
+
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+#__next,
+body,
+html {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}

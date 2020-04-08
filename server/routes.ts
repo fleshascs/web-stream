@@ -5,5 +5,7 @@ const nextRoutes = require("next-routes");
 const routes = (module.exports = nextRoutes());
 
 routes.add("home", "/");
+routes.add("/login", "/login/index");
+routes.add("/user/:username", "/user/index");
 
 export default routes;

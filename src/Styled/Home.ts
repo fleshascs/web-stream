@@ -3,13 +3,12 @@ import styled from "styled-components";
 // #endregion Global Imports
 
 export const Container = styled.div`
-    background-color: ${({ theme }) => theme.colors.primary};
     display: flex;
-    flex-direction: column;
-    flex: 1 1 100%;
-    justify-content: flex-start;
-    align-items: center;
-    min-height: 100vh;
+    flex-wrap: nowrap;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    flex: 1;
 `;
 
 export const Top = styled.div`
@@ -17,11 +16,13 @@ export const Top = styled.div`
 `;
 
 export const Middle = styled.div`
-    text-align: center;
+    height: 100%;
+    flex: 1 1 0%;
+    background-color: ${({ theme }) => theme.colors.background};
     display: flex;
-    flex: 1 1 100%;
-    width: 100%;
-    justify-content: flex-start;
+    flex-direction: column;
+    padding: 1rem;
+    overflow: auto;
 `;
 
 export const MiddleLeft = styled.div`
