@@ -10,3 +10,4 @@ export { VideoCard } from "@Components/VideoCard";
 export { LocaleButton } from "@Components/LocaleButton";
 export { ViewersList } from "@Components/ViewersList";
 export { LoginRegisterButtons } from "@Components/LoginRegisterButtons";
+export { UserInfo } from "@Components/UserInfo";

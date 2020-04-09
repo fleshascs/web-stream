@@ -20,7 +20,7 @@ export const Login: NextPage<ILogin.IProps, ILogin.InitialProps> = ({
         <Container>
             <Box>
                 <Title>Login or Register</Title>
-                <GoogleLink href="/auth/google">
+                <GoogleLink href="/api/auth/google">
                     <Icon src="/static/images/google-brands.svg" /> Login with
                     Google+
                 </GoogleLink>

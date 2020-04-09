@@ -4,7 +4,7 @@ import Link from "next/link";
 // #endregion Global Imports
 
 // #region Local Imports
-import { Container } from "./styled";
+import { Container, LoginButton } from "./styled";
 // #endregion Local Imports
 
 // #region Interface Imports
@@ -17,7 +17,7 @@ export const LoginRegisterButtons: React.FunctionComponent<
     return (
         <Container>
             <Link href="/login">
-                <a>Login or Register</a>
+                <LoginButton>Login or Register</LoginButton>
             </Link>
         </Container>
     );
