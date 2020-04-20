@@ -18,7 +18,7 @@ export const UserInfo: React.FunctionComponent<IUserInfo.IProps> = (
     return (
         <Container>
             <Username>{identity.displayName}</Username>
-            <LogoutLink>logout</LogoutLink>
+            <LogoutLink href="/logout">logout</LogoutLink>
         </Container>
     );
 };

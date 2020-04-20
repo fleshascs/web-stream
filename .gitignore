@@ -153,4 +153,6 @@ documentation/website/build
 # local history plugin
 .history
 
+static/LiveApp
+
 # End of https://www.gitignore.io/api/vim,node,macos

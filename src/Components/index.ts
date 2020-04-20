@@ -11,3 +11,6 @@ export { LocaleButton } from "@Components/LocaleButton";
 export { ViewersList } from "@Components/ViewersList";
 export { LoginRegisterButtons } from "@Components/LoginRegisterButtons";
 export { UserInfo } from "@Components/UserInfo";
+export { Left } from "@Components/Left";
+export { Shoutbox } from "@Components/Shoutbox";
+export { StreamControls } from "@Components/StreamControls";

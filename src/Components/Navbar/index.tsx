@@ -11,7 +11,7 @@ export const LINKS = [
         paths: ["/", "/index"],
     },
     {
-        textId: "test stream",
+        textId: "Broadcast",
         to: "/user/test",
         paths: ["/user"],
     },

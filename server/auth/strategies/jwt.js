@@ -30,6 +30,8 @@ const strategy = app => {
     passport.use(new JWTStrategy(strategyOptions, verifyCallback));
 
     app.use(function(req, res, next) {
+        //console.log("signedCookies", req.signedCookies);
+
         if (req.cookies.jwt) {
             var decoded = jwt.decode(req.cookies.jwt, process.env.JWT_SECRET);
             //console.log("decoded", decoded);

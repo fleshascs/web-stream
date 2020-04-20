@@ -4,6 +4,7 @@ import App, { AppInitialProps, AppContext } from "next/app";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import withRedux from "next-redux-wrapper";
+import Router, { withRouter } from "next/router";
 // #endregion Global Imports
 
 // #region Local Imports
@@ -13,6 +14,8 @@ import { AppWithStore } from "@Interfaces";
 import { makeStore } from "@Redux";
 import { Header, Navbar, LoginRegisterButtons, UserInfo } from "@Components";
 import { IdentityContext } from "@Services/session/identity";
+import { connectToSocket, socket } from "@Services/socket";
+import { connectToSocket as connectToMediaSocket } from "@Services/socket/mediaSocket";
 
 import { Main, Container, CollumnsWrapper } from "@Styled/Layout";
 import "@Static/css/global.scss";
@@ -33,6 +36,24 @@ class WebApp extends App<AppWithStore> {
             pageProps.user = ctx.res.user;
         }
         return { pageProps };
+    }
+
+    componentDidMount() {
+        connectToSocket();
+        connectToMediaSocket();
+
+        if (this.props.router.query && this.props.router.query.id) {
+            socket.emit("addViewer", { room: this.props.router.query.id });
+        }
+
+        //this.props.router;
+
+        Router.events.on("routeChangeStart", url => {
+            console.log("url", url, this.props.router.query.id);
+            if (this.props.router.query && this.props.router.query.id) {
+                socket.emit("addViewer", { room: this.props.router.query.id });
+            }
+        });
     }
 
     render() {
@@ -66,4 +87,4 @@ class WebApp extends App<AppWithStore> {
     }
 }
 
-export default withRedux(makeStore)(appWithTranslation(WebApp));
+export default withRedux(makeStore)(appWithTranslation(withRouter(WebApp)));

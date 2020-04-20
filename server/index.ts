@@ -6,13 +6,14 @@ import nextI18NextMiddleware from "next-i18next/middleware";
 import { urlencoded, json } from "body-parser";
 import cookieParser from "cookie-parser";
 import passport from "passport";
-const { Client } = require("pg");
 // #endregion Global Imports
 
 // #region Local Imports
 import nextI18next from "./i18n";
 import routes from "./routes";
 import { initialiseAuthentication } from "./auth";
+import { connectToDatabase, client } from "./database/connection";
+import * as socket from "./socket";
 // #endregion Local Imports
 
 const port = parseInt(process.env.PORT || "3000", 10);
@@ -20,28 +21,20 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handler = routes.getRequestHandler(app);
 
-app.prepare().then(() => {
+app.prepare().then(async () => {
     const server = express();
-
+    await connectToDatabase();
     app.setAssetPrefix(process.env.STATIC_PATH);
-    server.use(express.static(path.join(__dirname, "../static")));
-    server.use(nextI18NextMiddleware(nextI18next));
     server.use(urlencoded({ extended: true }));
     server.use(json());
     server.use(cookieParser());
     server.use(passport.initialize());
+    server.use(express.static(path.join(__dirname, "../static")));
+    server.use(nextI18NextMiddleware(nextI18next));
     initialiseAuthentication(server);
 
     server.get("/auth", async (req, res) => {
         try {
-            const client = new Client({
-                connectionString: process.env.DATABASE_URL,
-                ssl: {
-                    rejectUnauthorized: false,
-                },
-            });
-
-            await client.connect();
             const result = await client.query("SELECT * FROM users;");
             res.json({ search: result, url: process.env.DATABASE_URL });
         } catch (error) {
@@ -50,7 +43,9 @@ app.prepare().then(() => {
     });
 
     server.get("*", (req, res, next) => handler(req, res));
-    server.listen(port);
+    const httpServer = server.listen(port);
+    //@ts-ignore
+    socket.init(httpServer);
 
     // eslint-disable-next-line no-console
     console.log(
