@@ -39,8 +39,8 @@ class WebApp extends App<AppWithStore> {
     }
 
     componentDidMount() {
-        connectToSocket();
-        connectToMediaSocket();
+        //connectToSocket();
+        //connectToMediaSocket();
 
         if (this.props.router.query && this.props.router.query.id) {
             socket.emit("addViewer", { room: this.props.router.query.id });
