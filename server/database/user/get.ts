@@ -1,6 +1,6 @@
 import { client } from "../connection";
 
-async function getUserById(id) {
+async function getUserById(id: string) {
     //return await UserModel.findById(id).exec()
 }
 
