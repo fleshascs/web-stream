@@ -10,6 +10,7 @@
     "scripts": {
         "start:dev": "nodemon",
         "build": "next build && tsc --project tsconfig.server.json",
+        "heroku-postbuild": "npm run build",
         "start": "cross-env NODE_ENV=production node dist/index.js",
         "test": "jest --coverage",
         "lint": "eslint './{src,pages,server}/**/*' --ext .tsx,.ts",
