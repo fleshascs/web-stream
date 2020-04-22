@@ -1,5 +1,14 @@
 import { client } from "../connection";
 
+interface ICreateUser {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    providerId: string;
+    provider: string;
+}
+
 async function createUser({
     firstName,
     lastName,
@@ -7,7 +16,7 @@ async function createUser({
     password,
     providerId,
     provider,
-}) {
+}: ICreateUser) {
     //   return new Promise(async (resolve, reject) => {
     //     const user = await UserModel.findOne({ email })
     //     if (user) {
